@@ -2,7 +2,7 @@ import axios from "axios";
 import { logout } from "../src/shared/utils/auth";
 const apiClient = axios.create({
   baseURL: "http://localhost:5002/api",
-  timeout: 10000,
+  timeout: 1000,
 });
 
 apiClient.interceptors.request.use(
@@ -42,7 +42,19 @@ export const register = async (data) => {
   }
 };
 
-//secure rooutes
+//secure routes
+
+export const sendFriendInvitation = async (data) => {
+  try {
+    return await apiClient.post("/friend-invitation/invite", data);
+  } catch (exception) {
+    checkResponseCode(exception);
+    return {
+      error: true,
+      exception,
+    };
+  }
+};
 
 const checkResponseCode = (exception) => {
   const responseCode = exception?.response?.status;
