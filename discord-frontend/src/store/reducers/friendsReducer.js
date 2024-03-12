@@ -1,4 +1,4 @@
-import friendsActions from "../actions/friendsAction";
+import { friendsActions } from "../actions/friendsAction";
 const initState = {
   friends: [],
   pendingFriendsInvitations: [],
