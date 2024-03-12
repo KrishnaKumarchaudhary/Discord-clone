@@ -12,13 +12,13 @@ const registerSocketServer = (server) => {
 
   serverStore.setSocketServerInstance(io);
 
-  
+
   io.use((socket, next) => {
     authSocket(socket, next);
   });
   io.on("connection", (socket) => {
-    console.log("user connected");
-    console.log(socket.id);
+    //console.log("user connected");
+    //console.log(socket.id);
     newConnectionHandler(socket, io);
     socket.on("disconnect", () => {
       disconnectHandle(socket);

@@ -18,7 +18,7 @@ const updateFriendsPendingInvitations = async (userId) => {
       });
     });
   } catch (error) {
-    console.log(error);
+    //console.log(error);
   }
 };
 
