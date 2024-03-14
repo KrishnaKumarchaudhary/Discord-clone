@@ -3,6 +3,9 @@ import { Tooltip, Typography } from "@mui/material";
 import Avatar from "../../../shared/components/Avatar";
 import Box from "@mui/material/Box";
 import InvitationDecisionBuittons from "./InvitationDecisionBuittons";
+import { connect } from "react-redux";
+import { getActions } from "../../../store/actions/friendsAction";
+
 const PendingInvitationsListItem = ({
   id,
   username,
@@ -10,14 +13,15 @@ const PendingInvitationsListItem = ({
   acceptFriendInvitation = () => {},
   rejectFriendInvitation = () => {},
 }) => {
-  const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [buttonsDisabled, setButtonsDisabled] = useState(false);
   const handleAcceptInvitation = () => {
-    acceptFriendInvitation({ id: id });
-    setButtonDisabled(true);
+    acceptFriendInvitation({ id });
+    setButtonsDisabled(true);
   };
+
   const handleRejectInvitation = () => {
-    rejectFriendInvitation({ id: id });
-    setButtonDisabled(true);
+    rejectFriendInvitation({ id });
+    setButtonsDisabled(true);
   };
   return (
     <Tooltip title={mail}>
@@ -46,7 +50,7 @@ const PendingInvitationsListItem = ({
           </Typography>
 
           <InvitationDecisionBuittons
-            disabled={buttonDisabled}
+            disabled={buttonsDisabled}
             acceptInvitationHandler={handleAcceptInvitation}
             rejectInvitationHandler={handleRejectInvitation}
           />
@@ -56,4 +60,10 @@ const PendingInvitationsListItem = ({
   );
 };
 
-export default PendingInvitationsListItem;
+const mapActionsToProps = (dispatch) => {
+  return {
+    ...getActions(dispatch),
+  };
+};
+
+export default connect(null, mapActionsToProps)(PendingInvitationsListItem);
